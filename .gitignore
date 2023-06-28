@@ -1,0 +1,8 @@
+library/node_modules/**/*
+client/node_modules/**/*
+datatransfer/node_modules/**/*
+datatransfer/.env
+server/node_modules/**/*
+server/.env
+.DS_Store
+client/angular.json

@@ -1,0 +1,24 @@
+<mat-card style="width:90%;background-color: #3f51b5; color: white;">
+  <mat-card-header>
+      <div class="fxLayout-row-center">
+          <h2>Mission Reviewer</h2>
+          <span class="flex-spacer"></span>
+          <form [formGroup]="reviewForm">
+            <div class="formField">
+              <mat-form-field appearance="fill" class="fieldWidth">
+                  <mat-label>Review Start Date</mat-label>
+                  <input matInput [matDatepicker]="datepicker"
+                      formControlName="startDate" (dateChange)="getMissionDays()">
+                  <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+                  <mat-datepicker #datepicker></mat-datepicker>
+              </mat-form-field>
+          </div>
+          </form>
+      </div>
+  </mat-card-header>
+  <mat-card-content class="fxLayout-column-center" style="overflow-y:auto;">
+    <ng-container *ngIf="this.days.length > 0">
+      <app-review-day *ngFor="let day of days" [day]="day"></app-review-day>
+    </ng-container>
+  </mat-card-content>
+</mat-card>

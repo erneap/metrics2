@@ -1,0 +1,9 @@
+<h3>Current User List</h3>
+<div class="adminlist">
+  <button mat-raised-button style="width: 99%;" 
+    (click)="onSelectUser(undefined)">Add New User</button>
+  <button *ngFor="let user of this.users"
+    mat-raised-button [color]="user.getUserStatus()" 
+    (click)="onSelectUser(user)"
+    style="width: 99%;">{{user.getLastFirst()}}</button>
+</div>

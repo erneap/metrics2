@@ -1,0 +1,80 @@
+.oDate {
+  top: 1px;
+  width: 100px;
+  bottom: 1px;
+  background-color: #3f51b5;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+.oSystem {
+  top: 1px;
+  bottom: 1px;
+  width: 150px;
+  background-color: #3f51b5;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+.oProblem {
+  top: 1px;
+  bottom: 1px;
+  width: 400px;
+  background-color: #3f51b5;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+.oButton {
+  top: 1px;
+  bottom: 1px;
+  width: 50px;
+  background-color: #3f51b5;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+.title {
+  top: 1px;
+  bottom: 1px;
+  width: 650px;
+  background-color: #3f51b5;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 14pt;
+}
+
+.outdate {
+  top: 1px;
+  bottom: 1px;
+  width: 300px;
+  background-color: #3f51b5;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+.item {
+  font-size: 10pt;
+  font-weight: normal;
+}
+
+.item:nth-child(odd) {
+  background-color: lightblue;
+  color: black;
+}
+
+.item:nth-child(even) {
+  background-color: white;
+  color: black;
+}
+
+input {
+  color: black;
+}

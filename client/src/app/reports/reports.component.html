@@ -1,0 +1,70 @@
+<div class="fxLayout fxLayout-column-center">
+  <mat-card style="width:600px;background-color: #3f51b5; color: white;">
+      <mat-card-header>
+          <div class="fxLayout-row-center">
+              <h2>Report Request</h2>
+          </div>
+      </mat-card-header>
+      <mat-card-content class="fxLayout-column-center" style="overflow-y:auto;">
+        <form [formGroup]="reportForm">
+          <div class="fxLayout-row-center">
+            <div class="formField">
+              <mat-form-field class="fieldWidth">
+                <mat-label>Report</mat-label>
+                <mat-select formControlName="report">
+                  <mat-option *ngFor="let rtype of reports"
+                    [value]="rtype">{{rtype}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="formField">
+              <mat-form-field class="fieldWidth">
+                <mat-label>Report Period</mat-label>
+                <mat-select formControlName="period">
+                  <mat-option *ngFor="let rtype of periods"
+                    [value]="rtype">{{rtype}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="formField">
+              <mat-form-field class="fieldWidth">
+                <mat-label>Report Limits</mat-label>
+                <mat-select formControlName="limits">
+                  <mat-option *ngFor="let rtype of includes"
+                    [value]="rtype">{{rtype}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="fxLayout-row-center">
+            <div class="formField">
+              <mat-form-field appearance="fill" class="fieldWidth">
+                <mat-label>Start Date</mat-label>
+                <input matInput [matDatepicker]="datepicker"
+                  formControlName="startDate">
+                <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+                <mat-datepicker #datepicker></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="formField" *ngIf="this.reportForm.value.period === 'Custom'">
+              <mat-form-field appearance="fill" class="fieldWidth">
+                <mat-label>End Date</mat-label>
+                <input matInput [matDatepicker]="datepicker2"
+                  formControlName="endDate">
+                <mat-datepicker-toggle matIconSuffix [for]="datepicker2"></mat-datepicker-toggle>
+                <mat-datepicker #datepicker2></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="fxLayout-row-center" style="background-color: white;"
+            *ngIf="this.reportForm.value.period === 'Weekly' || this.reportForm.value.period === 'Custom'">
+            <mat-checkbox formControlName="daily">Include Daily Reports</mat-checkbox>
+          </div>
+          <div class="fxLayout-row-center" style="margin-top: 25px;">
+            <button mat-raised-button color="accent"
+              (click)="createReport()">Create Report</button>
+          </div>
+        </form>
+      </mat-card-content>
+  </mat-card>
+</div>

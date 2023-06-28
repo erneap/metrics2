@@ -1,0 +1,22 @@
+<ng-container *ngIf="sensor.sensorID !== ''">
+  <div class="fxLayout-row-center">
+    <div class="sensor">{{sensor.sensorID}}</div>
+    <div class="sensor">{{convertToHHMM(sensor.preflightMinutes)}}</div>
+    <div class="sensor">{{convertToHHMM(sensor.scheduledMinutes)}}</div>
+    <div class="sensor">{{convertToHHMM(sensor.executedMinutes)}}</div>
+    <div class="sensor">{{convertToHHMM(sensor.postflightMinutes)}}</div>
+    <div class="sensor">{{sensor.finalCode}}</div>
+    <div class="sensor">{{sensor.kitNumber}}</div>
+  </div>
+</ng-container>
+<ng-container *ngIf="sensor.sensorID === ''">
+  <div class="fxLayout-row-center">
+    <div class="sensor"></div>
+    <div class="sensor"></div>
+    <div class="sensor"></div>
+    <div class="sensor"></div>
+    <div class="sensor"></div>
+    <div class="sensor"></div>
+    <div class="sensor"></div>
+  </div>
+</ng-container>

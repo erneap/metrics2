@@ -1,0 +1,36 @@
+<div class="fxLayout-column-center">
+  <div class="fxLayout-row-center">
+    <div class="title">Outages Between:</div>
+    <div class="outdate">
+      <form [formGroup]="this.listForm">
+        <div class="formField">
+          <mat-form-field appearance="fill" class="fieldWidth">
+            <mat-label>Enter view range</mat-label>
+            <mat-date-range-input [rangePicker]="datepicker">
+              <input matStartDate formControlName="startdate" 
+              placeholder="Start date"
+              (dateChange)="changeDate()">
+              <input matEndDate formControlName="enddate" 
+              placeholder="End date"
+              (dateChange)="changeDate()">
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY - MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+            <mat-date-range-picker #datepicker></mat-date-range-picker>
+          </mat-form-field>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="fxLayout-row-center">
+    <div class="oDate">Date</div>
+    <div class="oDate">Number</div>
+    <div class="oSystem">System</div>
+    <div class="oSystem">Enclave</div>
+    <div class="oProblem">Problem</div>
+    <div class="oButton">Action</div>
+  </div>
+  <app-ground-outage-item *ngFor="let out of this.outageList" [outage]="out"
+    (selected)="selectOutage($event)" class="item">
+  </app-ground-outage-item>
+</div>

@@ -1,0 +1,25 @@
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - /Volumes/Elements/mongodata:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ernies
+      MONGO_INITDB_ROOT_PASSWORD: zse45RDXzse45RDX
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ernies
+      ME_CONFIG_MONGODB_ADMINPASSWORD: zse45RDXzse45RDX
+      ME_CONFIG_MONGODB_URL: mongodb://ernies:zse45RDXzse45RDX@mongo:27017/

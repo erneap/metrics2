@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Metrics Assistance</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <h1>Report Creation</h1>
+  <img src="../images/reports.png">
+  <p>
+    The whole purpose of the application is the creation of required reports 
+    for the various entities needing them.  Two types of reports are currently 
+    available: Mission Summary and DRAW Report.  Each report is created as an 
+    Excel (xlsx) file and will be downloaded automatically to your designated 
+    download folder.
+  </p>
+  <ol class="level1">
+    <li>
+      Select the type of report to be created either Msn Summary or Draw.  The 
+      XINT report is not available, though listed.
+    </li>
+    <li>
+      Select the Report Period as a daily (1 day), weekly (7 day), monthly 
+      (1 month), annual (full year), or custom report.
+    </li>
+    <li>
+      Select the limits for the report which concerns the amount of data evaluated 
+      in its preparation.  The choices are Full Report (all missions/outages for 
+      all sensors), GEOINTn (All GEOINT Sensors), SYERS, DDSA, or XINT only data.
+    </li>
+    <li>
+      Start Date: Use the calendar icon to select the date from a calendar.
+      <ol class="level2">
+        <li>Daily Report - The date selected will be the only date used in the 
+          report.
+        </li>
+        <li>
+          Weekly Report - This date will be the first day for the report and the 
+          last day will be calculated by adding 6 more days.
+        </li>
+        <li>
+          Monthly Report - This date will determine the month and year for the 
+          report.  The start and ending dates will be determined as the 1st of 
+          the month and the last day is the end of that month.
+        </li>
+        <li>
+          Annual Report - This date will select the year.  The start date will 
+          be the 1st of January and the last day will be the 31st of December 
+          for that year.
+        </li>
+        <li>
+          Custom Report - This date will be the first day of the report.  An 
+          additional date input will display for the last day of the report 
+          period.
+        </li>
+      </ol>
+    </li>
+    <li>
+      Include Daily Reports:  This is mainly for weekly or custom reports of 14 
+      or less days.  It will be ignored in the creation for daily or any report 
+      over 14 days.  Click the checkbox to select.
+    </li>
+    <li>
+      Click the "Create Report" button to create the report.  The exact behavior 
+      on your computer is impossible to guess, but the file will be downloaded 
+      to your computer for display, saving and any other use.
+    </li>
+  </ol>
+  <p class="bottomNav">
+    <a href="purge.html">Purge Old Missions/Outages</a>
+  </p>
+</body>
+</html>

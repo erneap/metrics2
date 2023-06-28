@@ -1,0 +1,26 @@
+<div class="fxLayout-column-center">
+  <div class="fxLayout-row-center">
+    <div class="label">Platform</div>
+    <div class="label">Sortie</div>
+    <div class="label">Exploitation</div>
+    <div class="label">Article</div>
+    <div class="label">Comm</div>
+    <div class="label">Primary DGS</div>
+    <div class="label"></div>
+  </div>
+  <div class="fxLayout-row-center">
+    <div class="mission">{{mission.platformID}}</div>
+    <div class="mission">{{mission.sortieID}}</div>
+    <div class="mission">{{mission.missionData?.exploitation}}</div>
+    <div class="mission">{{mission.missionData?.tailNumber}}</div>
+    <div class="mission">{{mission.missionData?.communications}}</div>
+    <div class="mission">{{mission.missionData?.primaryDCGS}}</div>
+    <div class="mission"></div>
+  </div>
+  <app-review-sensors [sensors]="sensors"></app-review-sensors>
+  <div class="fxLayout-row-center">
+    <div class="label">Comments</div>
+    <div class="comments">{{getComments()}}</div>
+  </div>
+  <div class="empty">&nbsp;</div>
+</div>

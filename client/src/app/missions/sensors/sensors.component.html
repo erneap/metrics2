@@ -1,0 +1,14 @@
+<mat-tab-group *ngIf="sensors.length > 0" [backgroundColor]="'accent'" >
+  <mat-tab label="GEOINT" *ngIf="showTab('GEOINT')">
+    <app-imint-sensor [sensor]="getSensor('GEOINT')"
+      [missionid]="missionid"></app-imint-sensor>
+  </mat-tab>
+  <mat-tab label="XINT" *ngIf="showTab('XINT')">
+    <app-xint-sensor [sensor]="getSensor('XINT')"
+      [missionid]="missionid"></app-xint-sensor>
+  </mat-tab>
+  <mat-tab label="DDSA" *ngIf="showTab('MIST')">
+    <app-comm-sensor [sensor]="getSensor('MIST')"
+      [missionid]="missionid"></app-comm-sensor>
+  </mat-tab>
+</mat-tab-group>

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Metrics Assistance</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <h1>Edit/Delete a User</h1>
+  <img src="../images/admin_edituser.png">
+  <p>
+    User data will need to be edited, an account unlocked, passwords changed, 
+    and/or permissions changed.  All changes for selected user are updated 
+    immediately in the database.
+  </p>
+  <ol class="level1">
+    <li>
+      Start by selecting a user from the "Current User List".  This will display 
+      what is already in the database for you to edit.
+    </li>
+    <li>
+      The user's email address must be different than anyone elses, but since they 
+      receive email on that account, it should be unique.  I recommend an email 
+      address connected to your military, company or personal accounts.  No emails 
+      will be sent to this address at this time, so don't expect any from this 
+      application.
+    </li>
+    <li>
+      The name information (first, middle and last) is self-explanatory, edit 
+      any you need to change.  The change will be recorded after completion.
+    </li>
+    <li>
+      Password Changes:  Their password only lasts for 90 days before it is 
+      locked and you have to see the administrator.  The new password is first 
+      checked for complexity (min 10 characters in length, and 2 of each type of 
+      character (lower case, upper case, numeric, and other characters)).  Then, 
+      the second or verify inputs is compared against the first input area. 
+      After both input areas are typed in and the password is checked for 
+      complexity and verified, the "Change" button will appear and you can click 
+      it to set the new password.
+    </li>
+    <li>
+      Account Unlock:  This requires a password change, so see the item above.
+    </li>
+    <li>
+      Permission Groups:  The user's workcenter should be selected as the user's 
+      primary permission group. If the user is selected to be an 
+      administrator, then selected that group.
+    </li>
+  </ol>
+  <p>
+    <span class="importantNote">Delete User</span> As an administrator, you need 
+    to be aware when a user no longer needs access to the application. 1) select 
+    the user to delete from the "Current User List", 2) click the "Delete User" 
+    button.  This will bring up a verification for the deletion.  Click yes on
+    the verification dialog to complete the deletion.
+  </p>
+  <p class="bottomNav">
+    <a href="adduser.html">Create a New User</a>
+    <a href="purge.html">Purge Missions/Ground Outages</a>
+  </p>
+</body>
+</html>

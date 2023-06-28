@@ -1,0 +1,115 @@
+<div class="fxLayout fxLayout-column-center">
+  <mat-card
+      style="background-color: #3f51b5; color: white;">
+      <mat-card-header>
+          <div class="fxLayout-row-center">
+              <h2>XINT Package Information</h2>
+              <span class="flex-spacer"></span>
+              <button mat-icon-button
+                  matTooltip="Clear package information"
+                  (click)="clearComm()">
+                  <mat-icon>deselect</mat-icon>
+              </button>
+          </div>
+      </mat-card-header>
+      <mat-card-content class="fxLayout-column-center">
+          <form [formGroup]="commForm">
+              <div class="fxLayout-row-center">
+                  <div class="formField">
+                      <mat-form-field class="fieldWidth">
+                          <mat-label>Kit Number</mat-label>
+                          <input matInput formControlName="kitnumber"
+                              (blur)="updateSensor('kitnumber')">
+                      </mat-form-field>
+                  </div>
+                  <div class="formField">
+                      <mat-form-field class="fieldWidth">
+                          <mat-label>Final Code</mat-label>
+                          <mat-select formControlName="finalcode" 
+                              (selectionChange)="updateSensor('finalcode')">
+                              <mat-option *ngFor="let code of finalCodes"
+                                  [value]="code">{{code}}</mat-option>
+                          </mat-select>
+                      </mat-form-field>
+                  </div>
+              </div>
+              <div class="fxLayout-row-center">
+                  <div class="formField">
+                      <mat-form-field class="fieldWidth">
+                          <mat-label>Pre-Mission Time</mat-label>
+                          <input matInput formControlName="premission"
+                              (blur)="updateSensor('premission')">
+                          <mat-hint>HH:MM</mat-hint>
+                      </mat-form-field>
+                  </div>
+                  <div class="formField">
+                      <mat-form-field class="fieldWidth">
+                          <mat-label>Scheduled Time</mat-label>
+                          <input matInput formControlName="scheduled"
+                          (blur)="updateSensor('scheduled')">
+                          <mat-hint>HH:MM</mat-hint>
+                      </mat-form-field>
+                  </div>
+                  <div class="formField">
+                      <mat-form-field class="fieldWidth">
+                          <mat-label>Executed Time</mat-label>
+                          <input matInput formControlName="executed"
+                              (blur)="updateSensor('executed')">
+                          <mat-hint>HH:MM</mat-hint>
+                      </mat-form-field>
+                  </div>
+                  <div class="formField">
+                      <mat-form-field class="fieldWidth">
+                          <mat-label>Post-Mission Time</mat-label>
+                          <input matInput formControlName="postmission"
+                          (blur)="updateSensor('postmission')">
+                          <mat-hint>HH:MM</mat-hint>
+                      </mat-form-field>
+                  </div>
+              </div>
+              <div class="fxLayout-row-center">
+                  <div class="formField">
+                      <mat-form-field class="fieldWidth">
+                          <mat-label>Total Sensor Outage Time</mat-label>
+                          <input matInput formControlName="sensortotal"
+                          (blur)="updateSensor('sensortotal')">
+                          <mat-hint>(In Minutes)</mat-hint>
+                      </mat-form-field>
+                  </div>
+                  <div class="formField">
+                      <mat-form-field class="fieldWidth">
+                          <mat-label>Partial HB Outage Time</mat-label>
+                          <input matInput formControlName="partialhb"
+                          (blur)="updateSensor('partialhb')">
+                          <mat-hint>(In Minutes)</mat-hint>
+                      </mat-form-field>
+                  </div>
+                  <div class="formField">
+                      <mat-form-field class="fieldWidth">
+                          <mat-label>Partial LB Outage Time</mat-label>
+                          <input matInput formControlName="partiallb"
+                          (blur)="updateSensor('partiallb')">
+                          <mat-hint>(In Minutes)</mat-hint>
+                      </mat-form-field>
+                  </div>
+                  <div class="formField">
+                      <mat-form-field class="fieldWidth">
+                          <mat-label>Ground Outage Time</mat-label>
+                          <input matInput formControlName="groundout"
+                          (blur)="updateSensor('groundout')">
+                          <mat-hint>(In Minutes)</mat-hint>
+                      </mat-form-field>
+                  </div>
+              </div>
+              <div class="fxLayout-row-center">
+                  <mat-form-field style="width: 800px;">
+                      <mat-label>Sensor Comments</mat-label>
+                      <textarea matInput formControlName="comments"
+                          style="width: 100%;"
+                          (blur)="updateSensor('comments')"></textarea>
+                  </mat-form-field>
+              </div>
+          </form>
+      </mat-card-content>
+  </mat-card>
+</div>

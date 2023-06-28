@@ -1,0 +1,126 @@
+<div class="fxLayout fxLayout-column-center">
+  <mat-card style="width:90%;background-color: #3f51b5; color: white;">
+      <mat-card-header>
+          <div class="fxLayout-row-center">
+              <h2>Ground Outage Information</h2>
+              <span class="flex-spacer"></span>
+              <button mat-icon-button color="accent"
+                  matTooltip="Delete Current Outage"
+                  (click)="verifyDeletion()">
+                  <mat-icon>delete</mat-icon>
+              </button>
+              <button mat-icon-button
+                  matTooltip="Clear Outage display"
+                  (click)="clearOutage()">
+                  <mat-icon>deselect</mat-icon>
+              </button>
+          </div>
+      </mat-card-header>
+      <mat-card-content class="fxLayout-column-center" style="overflow-y:auto;">
+          <form [formGroup]="outageForm">
+              <div class="fxLayout-row-center">
+                <div class="formField">
+                  <mat-form-field appearance="fill" class="fieldWidth">
+                    <mat-label>Ground System</mat-label>
+                    <mat-select formControlName="system"
+                      (selectionChange)="getSystemEnclaves()">
+                      <mat-option *ngFor="let system of getSystems()"
+                        [value]="system.id">{{system.id}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="formField">
+                  <mat-form-field class="fieldWidth">
+                    <mat-label>System Enclave</mat-label>
+                    <mat-select formControlName="enclave">
+                      <mat-option *ngFor="let enclave of getSystemEnclaves()"
+                        [value]="enclave">{{enclave}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="fxLayout-row-center">
+                <div class="formField">
+                  <mat-form-field appearance="fill" class="fieldWidth">
+                    <mat-label>Outage Date</mat-label>
+                    <input matInput [matDatepicker]="datepicker"
+                        formControlName="outagedate"
+                        (dateChange)="getOutagesForDate()">
+                    <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+                    <mat-datepicker #datepicker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="formField">
+                  <mat-form-field class="fieldWidth">
+                    <mat-label>Outage Number</mat-label>
+                    <mat-select formControlName="outagenumber"
+                      (selectionChange)="selectOutage()">
+                      <mat-option value="0">New</mat-option>
+                      <mat-option *ngFor="let outage of getOutagesForDate()"
+                        [value]="outage.outageNumber">
+                        {{outage.outageNumber}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="formField">
+                  <mat-form-field class="fieldWidth">
+                    <mat-label>Outage Time</mat-label>
+                    <input matInput formControlName="outagetime"
+                      (blur)="updateOutage('outagetime')">
+                    <mat-hint>In Minutes</mat-hint>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="fxLayout-row-center" style="margin-bottom: 10px;">
+                <div class="fxLayout-row-center" style="background-color: white;">
+                  <mat-checkbox formControlName="duringmission"
+                  (change)="updateOutage('duringmission')">
+                    During Mission</mat-checkbox>
+                </div>
+              </div>
+              <div class="fxLayout-row-center">
+                <div class="formField">
+                  <mat-form-field class="fieldWidth">
+                    <mat-label>Subsystem(s)</mat-label>
+                    <input matInput formControlName="subsystems"
+                    (blur)="updateOutage('subsystems')">
+                    <mat-hint>Optional</mat-hint>
+                  </mat-form-field>
+                </div>
+                <div class="formField">
+                  <mat-form-field class="fieldWidth">
+                    <mat-label>Serena Ticket #</mat-label>
+                    <input matInput formControlName="reference"
+                    (blur)="updateOutage('reference')">
+                  </mat-form-field>
+                </div>
+                <div class="formField">
+                  <mat-form-field class="fieldWidth">
+                    <mat-label>Major Area</mat-label>
+                    <input matInput formControlName="majorarea"
+                    (blur)="updateOutage('majorarea')">
+                    <mat-hint>Optional</mat-hint>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="fxLayout-row-center">
+                <mat-form-field style="width: 800px;">
+                  <mat-label>Problem</mat-label>
+                  <textarea matInput formControlName="problem" 
+                  (blur)="updateOutage('problem')"></textarea>
+                </mat-form-field>
+              </div>
+              <div class="fxLayout-row-center">
+                <mat-form-field style="width: 800px;">
+                  <mat-label>Fix Action(s)</mat-label>
+                  <textarea matInput formControlName="fixaction"
+                  (blur)="updateOutage('fixaction')"></textarea>
+                </mat-form-field>
+              </div>
+          </form>
+          <app-ground-outage-list (selected)="this.selectOutageById($event)">
+          </app-ground-outage-list>
+      </mat-card-content>
+  </mat-card>
+</div>

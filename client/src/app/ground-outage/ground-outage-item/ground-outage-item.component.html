@@ -1,0 +1,14 @@
+<div class="fxLayout-row-center">
+  <div class="oDate" (click)="onClick()">{{getDate(this.outage.outageDate)}}</div>
+  <div class="oDate" (click)="onClick()">{{this.outage.outageNumber}}</div>
+  <div class="oSystem" (click)="onClick()">{{this.outage.groundSystem}}</div>
+  <div class="oSystem" (click)="onClick()">{{this.outage.classification}}</div>
+  <div class="oProblem" (click)="onClick()">{{this.outage.problem}}</div>
+  <div class="oButton">
+    <button mat-icon-button color="accent"
+      matTooltip="Delete this Outage"
+      (click)="onDelete()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</div>

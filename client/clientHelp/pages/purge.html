@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Metrics Assistance</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <h1>Purging Old Mission/Ground Outages</h1>
+  <img src="../images/admin_purge.png">
+  <p>
+    Every year we may need to purge old mission and ground outages from the 
+    application's database.  So a procedure has been added to do this on the 
+    administrator's page.  You need to to the purges of missions and ground 
+    outages separately.
+  </p>
+  <ol class="level1">
+    <li>
+      Choose whether you want to purge Missions or Ground Outages.  Select the 
+      purge type.
+    </li>
+    <li>
+      Next, select the Purge Date by using the calendar icon inside the 
+      input field to show a calendar, then move to the first date you want to 
+      keep.  This date is not included in the purge, but everything before this 
+      date will be removed from the database.  It is not recoverable.
+    </li>
+    <li>
+      Click the "Purge" button.  This will bring up a verification dialog to
+      verify you really want to delete these old records.  Click "Yes" to 
+      proceed and the request will be sent to the server for completion.
+    </li>
+  </ol>
+  <p class="bottomNav">
+    <a href="edituser.html">Edit/Delete a User</a>
+    <a href="report.html">Create a Report</a>
+  </p>
+</body>
+</html>

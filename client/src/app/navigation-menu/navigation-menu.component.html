@@ -1,0 +1,18 @@
+<mat-nav-list>
+  <a mat-list-item routerLinkActive="active-link"
+    routerLink="/missions">Missions</a>
+  <a mat-list-item routerLinkActive="active-link"
+    routerLink="/review">Mission Review</a>
+  <a mat-list-item routerLinkActive="active-link"
+    routerLink="/outages">Ground Outages</a>
+  <a mat-list-item routerLinkActive="active-link"
+    [disabled]="!this.authService.hasRole('ADMIN')"
+    routerLink="/admin">Admin</a>
+  <a mat-list-item routerLinkActive="active-link"
+    routerLink="/reports">Reports</a>
+</mat-nav-list>
+<mat-nav-list class="bottom">
+  <a mat-list-item routerLinkActive="active-link"
+    *ngIf="this.authService.hasRole('ADMIN')"
+    (click)="getOldReports()">Report Archive</a>
+</mat-nav-list>

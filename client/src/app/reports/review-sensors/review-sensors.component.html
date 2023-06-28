@@ -1,0 +1,13 @@
+<div class="fxLayout-column-center">
+  <div class="fxLayout-row-center">
+    <div class="sensor">Sensor</div>
+    <div class="sensor">PreMission</div>
+    <div class="sensor">Scheduled</div>
+    <div class="sensor">Executed</div>
+    <div class="sensor">PostMission</div>
+    <div class="sensor">Code</div>
+    <div class="sensor">Kit Number</div>
+  </div>
+  <app-review-sensor *ngFor="let sen of sensors" [sensor]="sen">
+  </app-review-sensor>
+</div>

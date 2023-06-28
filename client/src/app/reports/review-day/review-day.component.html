@@ -1,0 +1,11 @@
+<div class="fxLayout-column-center">
+  <div class="day">{{getDate()}}</div>
+  <ng-container *ngIf="this.day.missions.length === 0">
+    <div class="nomissions">No Missions Entered For This Date</div>
+  </ng-container>
+  <ng-container *ngIf="this.day.missions.length > 0">
+    <app-review-mission *ngFor="let msn of this.day.missions" [mission]="msn">
+    </app-review-mission>
+  </ng-container>
+  <div class="empty">&nbsp;</div>
+</div>
