@@ -555,15 +555,20 @@ func (ms *MissionSummary) AddSummarySheet(workbook *excelize.File,
 						}
 					}
 				} else {
+					found := false
 					for _, exp := range gs.Exploitations {
-						if strings.EqualFold(exp.Exploitation, mType.Exploitation) {
-							premission += mType.GetPremissionTime(sensors, &gs)
-							scheduled += mType.GetScheduledTime(sensors, &gs)
-							executed += (mType.GetExecutedTime(sensors, &gs) +
-								mType.GetAdditional(sensors, &gs))
-							overlap += mType.GetOverlap()
-							postmission += mType.GetPostmissionTime(sensors, &gs)
+						if strings.EqualFold(exp.Exploitation, mType.Exploitation) &&
+							strings.EqualFold(exp.PlatformID, mType.Platform) {
+							found = true
 						}
+					}
+					if found {
+						premission += mType.GetPremissionTime(sensors, &gs)
+						scheduled += mType.GetScheduledTime(sensors, &gs)
+						executed += (mType.GetExecutedTime(sensors, &gs) +
+							mType.GetAdditional(sensors, &gs))
+						overlap += mType.GetOverlap()
+						postmission += mType.GetPostmissionTime(sensors, &gs)
 					}
 				}
 			}
