@@ -60,7 +60,7 @@ func main() {
 			outages.DELETE("/:id", middleware.CheckJWT(), controllers.DeleteOutage)
 		}
 		admin := api.Group("/admin").Use(middleware.CheckJWT()).
-			Use(middleware.CheckRole("Scheduler", "ADMIN"))
+			Use(middleware.CheckRole("metrics", "ADMIN"))
 		{
 			admin.GET("/", controllers.GetAllUsers)
 			admin.GET("/:id", controllers.GetUser)

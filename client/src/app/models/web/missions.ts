@@ -9,6 +9,7 @@ export interface CreateMission {
     communications: string;
     tailNumber: string;
     overlap: number;
+    executed: boolean;
     aborted: boolean;
     cancelled: boolean;
     indefDelay: boolean;

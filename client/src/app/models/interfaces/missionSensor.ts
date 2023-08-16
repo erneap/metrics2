@@ -100,6 +100,7 @@ export interface IMissionData {
     tailNumber: string;
     communications: string;
     primaryDCGS: string;
+    executed: boolean;
     cancelled: boolean;
     aborted: boolean;
     indefDelay: boolean;
@@ -113,6 +114,7 @@ export class MissionData implements IMissionData {
     public tailNumber: string;
     public communications: string;
     public primaryDCGS: string;
+    public executed: boolean;
     public cancelled: boolean;
     public aborted: boolean;
     public indefDelay: boolean;
@@ -127,6 +129,7 @@ export class MissionData implements IMissionData {
         this.communications = (mData && mData.communications) 
             ? mData.communications : 'LOS';
         this.primaryDCGS = (mData && mData.primaryDCGS) ? mData.primaryDCGS : '';
+        this.executed = (mData && mData.executed) ? true : false;
         this.cancelled = (mData && mData.cancelled) ? true : false;
         this.aborted = (mData && mData.aborted) ? true : false;
         this.indefDelay = (mData && mData.indefDelay) ? true : false;

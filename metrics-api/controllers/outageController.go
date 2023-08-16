@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"context"
-	"fmt"
 	"net/http"
 	"sort"
 	"strings"
@@ -255,7 +254,6 @@ func UpdateOutage(c *gin.Context) {
 	case "number", "outagenumber":
 		outage.OutageNumber = data.NumberValue()
 	case "minutes", "outageminutes":
-		fmt.Println(data.Value)
 		outage.OutageMinutes = data.NumberValue()
 	case "subsystem":
 		outage.Subsystem = data.StringValue()
@@ -273,7 +271,6 @@ func UpdateOutage(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, web.Message{Message: "Unknown Field"})
 		return
 	}
-	fmt.Println(outage.OutageMinutes)
 	outage.Encrypt()
 
 	_, err = config.GetCollection(config.DB, "metrics", "groundoutages").ReplaceOne(ctx,

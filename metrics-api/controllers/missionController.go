@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"net/http"
 	"sort"
@@ -60,8 +59,6 @@ func GetMissionsByDate(c *gin.Context) {
 func GetMissionsByDates(c *gin.Context) {
 	sDate := c.Param("startdate")
 	eDate := c.Param("enddate")
-	fmt.Println(sDate)
-	fmt.Println(eDate)
 
 	var tmissions []interfaces.Mission
 
@@ -216,6 +213,7 @@ func CreateMission(c *gin.Context) {
 			Communications: data.Communications,
 			TailNumber:     data.TailNumber,
 			MissionOverlap: data.Overlap,
+			Executed:       data.Executed,
 			Aborted:        data.Aborted,
 			Cancelled:      data.Cancelled,
 			IndefDelay:     data.IndefDelay,
@@ -324,19 +322,28 @@ func UpdateMission(c *gin.Context) {
 		mission.MissionData.Comments = data.StringValue()
 	case "isexecuted":
 		switch strings.ToLower(data.StringValue()) {
+		case "executed":
+			mission.MissionData.Executed = true
+			mission.MissionData.Cancelled = false
+			mission.MissionData.Aborted = false
+			mission.MissionData.IndefDelay = false
 		case "cancelled":
+			mission.MissionData.Executed = false
 			mission.MissionData.Cancelled = true
 			mission.MissionData.Aborted = false
 			mission.MissionData.IndefDelay = false
 		case "aborted":
+			mission.MissionData.Executed = false
 			mission.MissionData.Cancelled = false
 			mission.MissionData.Aborted = true
 			mission.MissionData.IndefDelay = false
 		case "indefdelay":
+			mission.MissionData.Executed = false
 			mission.MissionData.Cancelled = false
 			mission.MissionData.Aborted = false
 			mission.MissionData.IndefDelay = true
 		default:
+			mission.MissionData.Executed = false
 			mission.MissionData.Cancelled = false
 			mission.MissionData.Aborted = false
 			mission.MissionData.IndefDelay = false

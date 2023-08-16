@@ -17,6 +17,7 @@ type CreateMission struct {
 	Communications string    `json:"communications"`
 	TailNumber     string    `json:"tailNumber"`
 	Overlap        uint      `json:"overlap"`
+	Executed       bool      `json:"executed"`
 	Aborted        bool      `json:"aborted"`
 	Cancelled      bool      `json:"cancelled"`
 	IndefDelay     bool      `json:"indefDelay"`

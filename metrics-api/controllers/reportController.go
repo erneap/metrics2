@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"bytes"
-	"fmt"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -86,7 +85,7 @@ func CreateReport(c *gin.Context) {
 			Daily:        data.IncludeDaily,
 		}
 		workbook, err := draw.Create()
-		
+
 		if err != nil {
 			c.JSON(http.StatusInternalServerError,
 				web.Message{Message: "Error during creation: " + err.Error()})
@@ -103,7 +102,6 @@ func CreateReport(c *gin.Context) {
 		}
 		path = filepath.Join(path, "DrawReport-"+data.ReportType+"-"+
 			now.Format("200601021504")+".xlsx")
-		fmt.Println(path)
 		if err := workbook.SaveAs(path); err != nil {
 			c.JSON(http.StatusInternalServerError, err.Error())
 			return

@@ -53,13 +53,13 @@ export class MissionsHomeComponent {
       msndate: [msndate, [Validators.required]],
       platform: [platform, [Validators.required ]],
       sortie: [sortie, [Validators.required, Validators.pattern("^[0-9]+$")]],
-      exploitation: [''],
+      exploitation: ['', [Validators.required]],
       tailnumber: '',
-      communications: '',
+      communications: ['', [Validators.required]],
       dcgs: '',
       overlap: ['0:00', [Validators.pattern("^[0-9]{0,2}:[0-9]{2}$")]],
       comments: '',
-      isExecuted: 'executed',
+      isExecuted: 'none',
       imintsensor: '',
     });
     this.setMission();
@@ -348,8 +348,11 @@ export class MissionsHomeComponent {
           this.missionForm.controls["overlap"].enable();
         this.missionForm.controls["comments"].setValue(data.missionData.comments);
         this.missionForm.controls["comments"].enable();
-        this.missionForm.controls['isExecuted'].setValue('executed');
-        if (data.missionData.cancelled) {
+        this.missionForm.controls['isExecuted'].setValue('none');
+        if (data.missionData.executed) {
+          this.missionForm.controls['isExecuted'].setValue('executed');
+
+        } else if (data.missionData.cancelled) {
           this.missionForm.controls['isExecuted'].setValue('cancelled');
         } else if (data.missionData.aborted) {
           this.missionForm.controls['isExecuted'].setValue('aborted');
@@ -382,7 +385,7 @@ export class MissionsHomeComponent {
       this.missionForm.controls["overlap"].disable();
       this.missionForm.controls["comments"].setValue('');
       this.missionForm.controls["comments"].disable();
-      this.missionForm.controls['isExecuted'].setValue('executed');
+      this.missionForm.controls['isExecuted'].setValue('none');
       this.missionForm.controls["isExecuted"].disable();
       this.missionForm.controls["imintsensor"].setValue('');
       this.missionForm.controls["imintsensor"].disable();

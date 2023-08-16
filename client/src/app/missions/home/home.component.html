@@ -67,6 +67,8 @@
                                 <mat-option *ngFor="let exp of getExploitations()"
                                     [value]="exp.id">{{exp.id}}</mat-option>
                             </mat-select>
+                            <mat-error color="warn" *ngIf="missionForm.get('exploitation')?.hasError('required')">
+                                Can't be empty</mat-error>
                         </mat-form-field>
                     </div>
                     <div *ngIf="showTailNumber()" class="formField">
@@ -90,6 +92,8 @@
                                 <mat-option *ngFor="let exp of getCommunications()"
                                     [value]="exp.id">{{exp.id}}</mat-option>
                             </mat-select>
+                            <mat-error color="warn" *ngIf="missionForm.get('communications')?.hasError('required')">
+                                Can't be empty</mat-error>
                         </mat-form-field>
                     </div>
                     <div class="formField">
@@ -122,7 +126,8 @@
                     <div class="fxLayout-row-center" style="background-color: white;">
                         <mat-radio-group formControlName="isExecuted"
                             (change)="updateMission('isExecuted')">
-                            <mat-radio-button checked [value]="'executed'">Executed</mat-radio-button>
+                            <mat-radio-button [value]="'none'">None</mat-radio-button>
+                            <mat-radio-button [value]="'executed'">Executed</mat-radio-button>
                             <mat-radio-button [value]="'cancelled'">Cancelled</mat-radio-button>
                             <mat-radio-button [value]="'aborted'">Aborted</mat-radio-button>
                             <mat-radio-button [value]="'indefdelay'">Indef Delay</mat-radio-button>

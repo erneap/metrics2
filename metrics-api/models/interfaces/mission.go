@@ -54,6 +54,7 @@ type MissionData struct {
 	Communications string          `json:"communications"`
 	PrimaryDCGS    string          `json:"primaryDCGS"`
 	Cancelled      bool            `json:"cancelled"`
+	Executed       bool            `json:"executed,omitempty"`
 	Aborted        bool            `json:"aborted"`
 	IndefDelay     bool            `json:"indefDelay"`
 	MissionOverlap uint            `json:"missionOverlap"`

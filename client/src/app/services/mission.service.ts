@@ -83,6 +83,7 @@ export class MissionService extends CacheService {
       communications: '',
       tailNumber: '',
       overlap: 0,
+      executed: false,
       aborted: false,
       cancelled: false,
       indefDelay: false,
