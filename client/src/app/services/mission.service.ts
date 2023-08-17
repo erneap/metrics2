@@ -59,13 +59,11 @@ export class MissionService extends CacheService {
   }
 
   getMissions(platform: string, msndate: Date): Observable<HttpResponse<MissionResponse>> {
-    const msnDate = new Date(Date.UTC(msndate.getFullYear(), msndate.getMonth(), msndate.getDate()));
     const url = `/metrics/api/v1/missions/${this.dateString(msndate)}/${platform}`;
     return this.httpClient.get<MissionResponse>(url, { observe: 'response'});
   }
 
   getMission(platform: string, msndate: Date, sortie: number): Observable<HttpResponse<IMission>> {
-    const msnDate = new Date(Date.UTC(msndate.getFullYear(), msndate.getMonth(), msndate.getDate()));
     const url = `/metrics/api/v1/missions/${this.dateString(msndate)}/${platform}/${sortie}`;
     return this.httpClient.get<IMission>(url, {observe: 'response'});
   }
@@ -80,7 +78,7 @@ export class MissionService extends CacheService {
       sortieID: sortie,
       exploitation: 'Primary',
       primaryDCGS: '',
-      communications: '',
+      communications: 'LOS',
       tailNumber: '',
       overlap: 0,
       executed: false,

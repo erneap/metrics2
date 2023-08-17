@@ -9,6 +9,8 @@ import { ImintSensorComponent } from './imint-sensor/imint-sensor.component';
 import { XintSensorComponent } from './xint-sensor/xint-sensor.component';
 import { CommSensorComponent } from './comm-sensor/comm-sensor.component';
 import { DeleteMissionDialogComponent } from './delete-mission-dialog/delete-mission-dialog.component';
+import { NewMissionDialogComponent } from './new-mission-dialog/new-mission-dialog.component';
+import { ChangeSortieIdDialogComponent } from './change-sortie-id-dialog/change-sortie-id-dialog.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { DeleteMissionDialogComponent } from './delete-mission-dialog/delete-mis
     ImintSensorComponent,
     XintSensorComponent,
     CommSensorComponent,
-    DeleteMissionDialogComponent
+    DeleteMissionDialogComponent,
+    NewMissionDialogComponent,
+    ChangeSortieIdDialogComponent
   ],
   imports: [
     CommonModule,

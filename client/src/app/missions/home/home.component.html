@@ -41,113 +41,112 @@
                     <div class="formField">
                         <mat-form-field class="fieldWidth">
                             <mat-label>Sortie ID</mat-label>
-                            <input matInput formControlName="sortie"
-                                (blur)="getSortie('sortie')">
-                            <mat-hint>Last two digits of the mission id</mat-hint>
-                            <mat-error color="warn" *ngIf="missionForm.get('sortie')?.hasError('required')">
-                                Can't be empty</mat-error>
-                            <mat-error color="warn" *ngIf="missionForm.get('sortie')?.hasError('pattern')">
-                                Must be a numeric value</mat-error>
+                            <mat-select formControlName="sortie"
+                                (selectionChange)="getSortie('sortie')">
+                                <mat-option *ngFor="let s of sortieList" [value]="s">
+                                    {{s.toUpperCase()}}
+                                </mat-option>
+                            </mat-select>
                         </mat-form-field>
                     </div>
-                    <div *ngIf="showEditKey">
-                        <button mat-icon-button [color]="editColor"
-                            (click)="clickEditKey()"
-                            [matTooltip]="editTooltip">
-                            <mat-icon>edit_square</mat-icon>
+                    <div *ngIf="showMission">
+                        <button mat-raised-button [color]="editColor">
+                            Change Sortie ID
                         </button>
                     </div>
                 </div>
-                <div class="fxLayout-row-center">
-                    <div class="formField">
-                        <mat-form-field class="fieldWidth">
-                            <mat-label>Mission Exploitation</mat-label>
-                            <mat-select formControlName="exploitation" 
-                                (selectionChange)="updateMission('exploitation')">
-                                <mat-option *ngFor="let exp of getExploitations()"
-                                    [value]="exp.id">{{exp.id}}</mat-option>
-                            </mat-select>
-                            <mat-error color="warn" *ngIf="missionForm.get('exploitation')?.hasError('required')">
-                                Can't be empty</mat-error>
+                <ng-container *ngIf="showMission">
+                    <div class="fxLayout-row-center">
+                        <div class="formField">
+                            <mat-form-field class="fieldWidth">
+                                <mat-label>Mission Exploitation</mat-label>
+                                <mat-select formControlName="exploitation" 
+                                    (selectionChange)="updateMission('exploitation')">
+                                    <mat-option *ngFor="let exp of getExploitations()"
+                                        [value]="exp.id">{{exp.id}}</mat-option>
+                                </mat-select>
+                                <mat-error color="warn" *ngIf="missionForm.get('exploitation')?.hasError('required')">
+                                    Can't be empty</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div *ngIf="showTailNumber()" class="formField">
+                            <mat-form-field class="fieldWidth">
+                                <mat-label>Tail Number</mat-label>
+                                <mat-select formControlName="tailnumber"
+                                    (selectionChange)="updateMission('tailnumber')">
+                                    <mat-option value="A">A</mat-option>
+                                    <mat-option value="B">B</mat-option>
+                                    <mat-option value="C">C</mat-option>
+                                    <mat-option value="D">D</mat-option>
+                                    <mat-option value="E">E</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="formField">
+                            <mat-form-field class="fieldWidth">
+                                <mat-label>Communications Method</mat-label>
+                                <mat-select formControlName="communications" 
+                                    (selectionChange)="updateMission('communications')">
+                                    <mat-option *ngFor="let exp of getCommunications()"
+                                        [value]="exp.id">{{exp.id}}</mat-option>
+                                </mat-select>
+                                <mat-error color="warn" *ngIf="missionForm.get('communications')?.hasError('required')">
+                                    Can't be empty</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="formField">
+                            <mat-form-field class="fieldWidth">
+                                <mat-label>Primary DCGS</mat-label>
+                                <mat-select formControlName="dcgs" 
+                                    (selectionChange)="updateMission('dcgs')">
+                                    <mat-option *ngFor="let exp of getDCGSs()"
+                                        [value]="exp.id">{{exp.id}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="formField">
+                            <mat-form-field class="fieldWidth">
+                                <mat-label>Mission Overlap (Time)</mat-label>
+                                <input matInput formControlName="overlap"
+                                    (blur)="updateMission('overlap')">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="fxLayout-row-center">
+                        <mat-form-field style="width: 800px;">
+                            <mat-label>Overall Mission Comments</mat-label>
+                            <textarea matInput formControlName="comments"
+                                style="width: 100%;"
+                                (blur)="updateMission('comments')"></textarea>
                         </mat-form-field>
                     </div>
-                    <div *ngIf="showTailNumber()" class="formField">
-                        <mat-form-field class="fieldWidth">
-                            <mat-label>Tail Number</mat-label>
-                            <mat-select formControlName="tailnumber"
-                                (selectionChange)="updateMission('tailnumber')">
-                                <mat-option value="A">A</mat-option>
-                                <mat-option value="B">B</mat-option>
-                                <mat-option value="C">C</mat-option>
-                                <mat-option value="D">D</mat-option>
-                                <mat-option value="E">E</mat-option>
-                            </mat-select>
-                        </mat-form-field>
+                    <div class="fxLayout-row-center">
+                        <div class="fxLayout-row-center" style="background-color: white;">
+                            <mat-radio-group formControlName="isExecuted"
+                                (change)="updateMission('isExecuted')">
+                                <mat-radio-button [value]="'none'">None</mat-radio-button>
+                                <mat-radio-button [value]="'executed'">Executed</mat-radio-button>
+                                <mat-radio-button [value]="'cancelled'">Cancelled</mat-radio-button>
+                                <mat-radio-button [value]="'aborted'">Aborted</mat-radio-button>
+                                <mat-radio-button [value]="'indefdelay'">Indef Delay</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
                     </div>
-                    <div class="formField">
-                        <mat-form-field class="fieldWidth">
-                            <mat-label>Communications Method</mat-label>
-                            <mat-select formControlName="communications" 
-                                (selectionChange)="updateMission('communications')">
-                                <mat-option *ngFor="let exp of getCommunications()"
-                                    [value]="exp.id">{{exp.id}}</mat-option>
-                            </mat-select>
-                            <mat-error color="warn" *ngIf="missionForm.get('communications')?.hasError('required')">
-                                Can't be empty</mat-error>
-                        </mat-form-field>
+                    <div class="fxLayout-row-center">
+                        <div class="fxLayout-row-center" style="background-color: white;">
+                            <h5 style="color: black;">GEOINT Exploitation Sensor:</h5>
+                            <mat-radio-group formControlName="imintsensor"
+                                (change)="updateMission('imintsensor')">
+                                <mat-radio-button *ngIf="showPME3"
+                                    value="PME3">PME3</mat-radio-button>
+                                <mat-radio-button *ngIf="showPME4"
+                                    value="PME4">PME4</mat-radio-button>
+                                <mat-radio-button *ngIf="showIMINT"
+                                    value="IMINT">IMINT</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
                     </div>
-                    <div class="formField">
-                        <mat-form-field class="fieldWidth">
-                            <mat-label>Primary DCGS</mat-label>
-                            <mat-select formControlName="dcgs" 
-                                (selectionChange)="updateMission('dcgs')">
-                                <mat-option *ngFor="let exp of getDCGSs()"
-                                    [value]="exp.id">{{exp.id}}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                    <div class="formField">
-                        <mat-form-field class="fieldWidth">
-                            <mat-label>Mission Overlap (Time)</mat-label>
-                            <input matInput formControlName="overlap"
-                                (blur)="updateMission('overlap')">
-                        </mat-form-field>
-                    </div>
-                </div>
-                <div class="fxLayout-row-center">
-                    <mat-form-field style="width: 800px;">
-                        <mat-label>Overall Mission Comments</mat-label>
-                        <textarea matInput formControlName="comments"
-                            style="width: 100%;"
-                            (blur)="updateMission('comments')"></textarea>
-                    </mat-form-field>
-                </div>
-                <div class="fxLayout-row-center">
-                    <div class="fxLayout-row-center" style="background-color: white;">
-                        <mat-radio-group formControlName="isExecuted"
-                            (change)="updateMission('isExecuted')">
-                            <mat-radio-button [value]="'none'">None</mat-radio-button>
-                            <mat-radio-button [value]="'executed'">Executed</mat-radio-button>
-                            <mat-radio-button [value]="'cancelled'">Cancelled</mat-radio-button>
-                            <mat-radio-button [value]="'aborted'">Aborted</mat-radio-button>
-                            <mat-radio-button [value]="'indefdelay'">Indef Delay</mat-radio-button>
-                        </mat-radio-group>
-                    </div>
-                </div>
-                <div class="fxLayout-row-center">
-                    <div class="fxLayout-row-center" style="background-color: white;">
-                        <h5 style="color: black;">GEOINT Exploitation Sensor:</h5>
-                        <mat-radio-group formControlName="imintsensor"
-                            (change)="updateMission('imintsensor')">
-                            <mat-radio-button *ngIf="showPME3"
-                                value="PME3">PME3</mat-radio-button>
-                            <mat-radio-button *ngIf="showPME4"
-                                value="PME4">PME4</mat-radio-button>
-                            <mat-radio-button *ngIf="showIMINT"
-                                value="IMINT">IMINT</mat-radio-button>
-                        </mat-radio-group>
-                    </div>
-                </div>
+                </ng-container>
             </form>
             <app-sensors [sensors]="missionSensors" [exploit]="exploit" 
                 [missionid]="missionid" [platform]="platform">
