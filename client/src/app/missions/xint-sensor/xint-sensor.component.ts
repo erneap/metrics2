@@ -98,7 +98,6 @@ export class XintSensorComponent extends Sensor {
 
   setSensorInfo() {
     if (this.sensor) {
-      console.log(JSON.stringify(this.sensor));
       this.commForm.controls['kitnumber'].setValue(this.sensor.kitNumber);
       this.commForm.controls['finalcode'].setValue(this.sensor.finalCode);
       this.commForm.controls['premission'].setValue(

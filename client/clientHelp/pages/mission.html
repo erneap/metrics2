@@ -9,28 +9,93 @@
   <h1>Editing the Basic Mission Information</h1>
   <img src="../images/empty_msn.png">
   <p>
-   You'll notice in the empty mission display, the top three input fields are 
-   Mission Date, Mission Platform and Sortie ID.  These three data elements 
-   are how the missions are separated and based on the platform, changes are 
-   made.
+   You'll notice in the empty mission display only allows you to choose the 
+   mission date, platform and sortie identifier.  When you enter or choose the 
+   mission date and platform a list of current missions are then listed in the 
+   sortie id selector with the first sortie in the list displayed.  If no 
+   missions are for that date and platform, none will be displayed and you will 
+   have to choose the "NEW" sortie id to create one.
   </p> 
+  <p>
+    Create a new mission:
+    <ol class="level1">
+      <li>Click the calendar icon in the Mission Date Editor.  this will bring 
+        up a calendar to allow you to pick the date for the mission.
+      </li>
+      <li>
+        Click in the Platform selector and choose the aircraft type from the 
+        list provided.  If missions for this date and platform are already in 
+        the database, they will be listed in the Sortie ID selector with the 
+        first mission's data displayed.
+      </li>
+      <li>
+        Click the Sortie ID selector and ensure the new mission isn't already 
+        listed.  If not, click the "NEW" choice in the selector.  A dialog will 
+        display to ask for the new sortie id.  It must be numeric, normally the 
+        last two digits of the mission identifier.
+      </li>
+      <img src="../images/new_msn_dialog.png">
+      <li>
+        In the Sortie ID editor, type in the number for the sortie identifier 
+        and click the "Ok" button to create the mission.  Click the "Cancel" 
+        button at the bottom to stop the process.  The newly created mission 
+        will be created using the mission date, platform and sortie identifier 
+        provided and will include default values for exploitation, communications, 
+        and status (executed).  After it is created, the rest of the mission 
+        display will be visible (if not already) and the new mission information 
+        will be present.
+      </li>
+    </ol>
+  </p>
+  <p>
+    Change a mission's Sortie ID
+    <ol class="level1">
+      <li>Click the calendar icon in the Mission Date Editor.  this will bring 
+        up a calendar to allow you to pick the date for the mission.
+      </li>
+      <li>
+        Click in the Platform selector and choose the aircraft type from the 
+        list provided.  If missions for this date and platform are already in 
+        the database, they will be listed in the Sortie ID selector with the 
+        first mission's data displayed.
+      </li>
+      <li>
+        If not already display, select the sortie id for the mission that needs 
+        to change its sortie identifier.
+      </li>
+      <img src="../images/full_msn_display.png">
+      <li>
+        Click on the "Change Sortie ID" button to the right of the Sortie ID.  
+        This will open a dialog box with old sortie identifer present.
+      </li>
+      <img src="../images/chg_sortie_dialog.png">
+      <li>
+        Type in the new sortie identifier.  Remember this must be numeric.
+      </li>
+      <li>
+        Click the "Ok" button to change the sortie id or "Cancel" button to 
+        abort the change.
+      </li>
+    </ol>
+  </p>
   <p><span class="importantNote">NOTE:</span> Most fields on the display cause
     changes to be recorded.  There is <span class="importantNote">NO</span> Save
     button and all modifications are saved as you left the edit box or field.
   </p>
-  <p>Create or Edit a mission:
+  <p>Edit a mission:
     <ol class="level1">
-      <li>Click on the calendar icon in the Mission Date editor.  This will bring
-        up a calendar for you to pick the date for the mission.
+      <li>Click the calendar icon in the Mission Date Editor.  this will bring 
+        up a calendar to allow you to pick the date for the mission.
       </li>
-      <li>Click in the Platform Editor and a list of available platforms or 
-        aircraft types will display.  Select the correct platform for this 
-        mission.  If the mission is already entered for the date and platform, 
-        a sortie identifier will display.
+      <li>
+        Click in the Platform selector and choose the aircraft type from the 
+        list provided.  If missions for this date and platform are already in 
+        the database, they will be listed in the Sortie ID selector with the 
+        first mission's data displayed.
       </li>
-      <li>If necessary, type in the sortie for this mission in the space provided.  If the 
-        mission is already in database, this will fill in the rest of the form 
-        with the available data.
+      <li>
+        If not already displayed, select the sortie id for the mission that needs 
+        to be edited.
       </li>
     </ol>
   </p>

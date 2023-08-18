@@ -50,7 +50,8 @@
                         </mat-form-field>
                     </div>
                     <div *ngIf="showMission">
-                        <button mat-raised-button [color]="editColor">
+                        <button mat-raised-button [color]="editColor"
+                            (click)="changeSortieID()">
                             Change Sortie ID
                         </button>
                     </div>
@@ -63,7 +64,8 @@
                                 <mat-select formControlName="exploitation" 
                                     (selectionChange)="updateMission('exploitation')">
                                     <mat-option *ngFor="let exp of getExploitations()"
-                                        [value]="exp.id">{{exp.id}}</mat-option>
+                                        [value]="exp.id"
+                                        [matTooltip]="exp.explanation">{{exp.id}}</mat-option>
                                 </mat-select>
                                 <mat-error color="warn" *ngIf="missionForm.get('exploitation')?.hasError('required')">
                                     Can't be empty</mat-error>
@@ -124,7 +126,6 @@
                         <div class="fxLayout-row-center" style="background-color: white;">
                             <mat-radio-group formControlName="isExecuted"
                                 (change)="updateMission('isExecuted')">
-                                <mat-radio-button [value]="'none'">None</mat-radio-button>
                                 <mat-radio-button [value]="'executed'">Executed</mat-radio-button>
                                 <mat-radio-button [value]="'cancelled'">Cancelled</mat-radio-button>
                                 <mat-radio-button [value]="'aborted'">Aborted</mat-radio-button>

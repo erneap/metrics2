@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DeleteMissionDialogComponent } from '../delete-mission-dialog/delete-mission-dialog.component';
 import { DialogService } from 'src/app/services/dialog-service.service';
 import { NewMissionDialogComponent } from '../new-mission-dialog/new-mission-dialog.component';
+import { ChangeSortieIdDialogComponent } from '../change-sortie-id-dialog/change-sortie-id-dialog.component';
 
 @Component({
   selector: 'app-missions-home',
@@ -128,7 +129,7 @@ export class MissionsHomeComponent {
     const platform = this.missionForm.value.platform;
     let sortieID = this.missionForm.value.sortie;
     const regexp = new RegExp('^[0-9]*$')
-    if (msnDate.getTime() !== 0 && platform !== '' && sortieID === '') {
+    if (field.toLowerCase() === 'msndate' || field.toLowerCase() === 'platform') {
       this.getSorties();
     } else if (msnDate.getTime() !== 0 && platform !== '' && sortieID === 'new') {
       // show the new sortie dialog to get the new sortie id then create the
@@ -136,39 +137,38 @@ export class MissionsHomeComponent {
       const dialogRef = this.dialog.open(NewMissionDialogComponent, {
         data: { sortieID: '' },
       });
-
       dialogRef.afterClosed().subscribe(result => {
         sortieID = result;
-        console.log(sortieID);
-
-        this.dialogService.showSpinner();
-        this.missionService.createMission(platform, msnDate, Number(sortieID))
-          .subscribe({
-            next: (resp) => {
-              this.dialogService.closeSpinner();
-              if (resp.headers.get('token') !== null) {
-                this.authService.setToken(resp.headers.get('token') as string);
-              }
-              const data = resp.body;
-              if (data && data !== null) {
-                if ((!data.id || data.id === '') && data._id) {
-                  data.id = data._id;
+        if (sortieID && sortieID !== '' && sortieID !== '0') {
+          this.dialogService.showSpinner();
+          this.missionService.createMission(platform, msnDate, Number(sortieID))
+            .subscribe({
+              next: (resp) => {
+                this.dialogService.closeSpinner();
+                if (resp.headers.get('token') !== null) {
+                  this.authService.setToken(resp.headers.get('token') as string);
                 }
-                this.sortieList.push(`${data.sortieID}`);
-                this.missionService.selectedMission = data;
-                this.mission = data;
-                this.missionService.missions.push(data)
-              } else {
-                this.missionService.selectedMission = undefined;
-                this.mission = undefined;
-              }
-              this.setMission();
-            },
-            error: (err) => {
-              this.dialogService.closeSpinner();
-              console.log(err);
-            },
-        });
+                const data = resp.body;
+                if (data && data !== null) {
+                  if ((!data.id || data.id === '') && data._id) {
+                    data.id = data._id;
+                  }
+                  this.sortieList.push(`${data.sortieID}`);
+                  this.missionService.selectedMission = data;
+                  this.mission = data;
+                  this.missionService.missions.push(data)
+                } else {
+                  this.missionService.selectedMission = undefined;
+                  this.mission = undefined;
+                }
+                this.setMission();
+              },
+              error: (err) => {
+                this.dialogService.closeSpinner();
+                console.log(err);
+              },
+          });
+        }
       });
     } else {
       if (msnDate.getTime() > 0 && platform !== '' && sortieID !== '' 
@@ -215,6 +215,72 @@ export class MissionsHomeComponent {
           });
         }
       }
+    }
+  }
+
+  changeSortieID(): void {
+    let sortie = '0';
+    if (this.missionService.selectedMission) {
+      let update: UpdateMission = {
+        id: this.missionService.selectedMission.id as string,
+        field: 'sortie',
+        value: ''
+      };
+      const msn = this.missionService.selectedMission;
+      if (msn) {
+        sortie = `${msn.sortieID}`;
+      }
+      const dialogRef = this.dialog.open(ChangeSortieIdDialogComponent, {
+        data: { sortieID: sortie },
+      });
+
+      const oldSorties: string[] = []
+      this.sortieList.forEach(id => {
+        if (id !== 'new' && id !== sortie) {
+          oldSorties.push(id);
+        }
+      })
+
+      dialogRef.afterClosed().subscribe(result => {
+        const sortieID = result;
+        if (sortieID && sortieID !== '' && sortieID !== '0') {
+          update.value = sortieID;
+          this.dialogService.showSpinner();
+          this.missionService.updateMission(update)
+            .subscribe({
+              next: (resp) => {
+                this.dialogService.closeSpinner();
+                if (resp.headers.get('token') !== null) {
+                  this.authService.setToken(resp.headers.get('token') as string);
+                }
+                const data = resp.body;
+                if (data && data !== null) {
+                  if ((!data.id || data.id === '') && data._id) {
+                    data.id = data._id;
+                  }
+                  oldSorties.push(`${data.sortieID}`);
+                  oldSorties.sort((a,b) => (a < b) ? -1 : 1);
+                  this.sortieList = [];
+                  this.sortieList.push('new');
+                  oldSorties.forEach(id => {
+                    this.sortieList.push(id);
+                  });
+                  this.missionService.selectedMission = data;
+                  this.mission = data;
+                  this.missionService.missions.push(data)
+                } else {
+                  this.missionService.selectedMission = undefined;
+                  this.mission = undefined;
+                }
+                this.setMission();
+              },
+              error: (err) => {
+                this.dialogService.closeSpinner();
+                console.log(err);
+              },
+          });
+        }
+      });
     }
   }
 
@@ -302,7 +368,6 @@ export class MissionsHomeComponent {
         this.missionForm.controls['isExecuted'].setValue('none');
         if (data.missionData.executed) {
           this.missionForm.controls['isExecuted'].setValue('executed');
-
         } else if (data.missionData.cancelled) {
           this.missionForm.controls['isExecuted'].setValue('cancelled');
         } else if (data.missionData.aborted) {

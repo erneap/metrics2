@@ -1,1 +1,24 @@
-<p>change-sortie-id-dialog works!</p>
+<h1 mat-dialog-title>Change Mission Identifier</h1>
+<div mat-dialog-content class="fxLayout-column-center">
+    <p>
+      Enter New Sortie Identifer for the Mission!
+    </p>
+    <form [formGroup]="sortieForm">
+      <mat-form-field>
+        <mat-label>Sortie ID</mat-label>
+        <input matInput formControlName="sortie" >
+        <mat-error *ngIf="sortieForm.controls['sortie']?.hasError('required')">
+          Field Required
+        </mat-error>
+        <mat-error *ngIf="sortieForm.controls['sortie']?.hasError('pattern')">
+          Must be a Number
+        </mat-error>
+      </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button *ngIf="sortieForm.valid" 
+      [mat-dialog-close]="sortieForm.value.sortie" 
+      cdkFocusInitial>Ok</button>
+</div>

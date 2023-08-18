@@ -343,7 +343,7 @@ func UpdateMission(c *gin.Context) {
 			mission.MissionData.Aborted = false
 			mission.MissionData.IndefDelay = true
 		default:
-			mission.MissionData.Executed = false
+			mission.MissionData.Executed = true
 			mission.MissionData.Cancelled = false
 			mission.MissionData.Aborted = false
 			mission.MissionData.IndefDelay = false
