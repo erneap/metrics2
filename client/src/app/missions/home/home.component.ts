@@ -99,20 +99,12 @@ export class MissionsHomeComponent {
             if (resp.headers.get('token') !== null) {
               this.authService.setToken(resp.headers.get('token') as string);
             }
+            this.missionForm.controls["sortie"].setValue('');
             const data = resp.body;
             if (data !== null && data.missions && data.missions.length > 0) {
               data.missions.forEach(msn => {
                 this.sortieList.push(`${msn.sortieID}`);
               });
-              this.missionService.selectedMission = data.missions[0];
-              this.mission = data.missions[0];
-              this.missionService.missions = data.missions;
-              this.missionForm.controls["sortie"].setValue(`${data.missions[0].sortieID}`);
-            } else {
-              this.missionService.selectedMission = undefined;
-              this.mission = undefined;
-              this.missionService.missions = [];
-              this.missionForm.controls["sortie"].setValue('');
             }
             this.setMission();
           },

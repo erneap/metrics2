@@ -202,6 +202,27 @@ func CreateMission(c *gin.Context) {
 		return
 	}
 
+	// first check to ensure no other missions with same key value are
+	// present.
+	startDate, err := time.ParseInLocation("2006-01-02", msnDate, time.UTC)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, web.Message{Message: err.Error()})
+		return
+	}
+	endDate := startDate.Add(24 * time.Hour)
+
+	log.Println(startDate)
+	log.Println(endDate)
+
+	filter := bson.M{"missionDate": bson.M{"$gte": startDate, "$lt": endDate},
+		"platformID": platform, "sortieID": sortie}
+	err = config.GetCollection(config.DB, "metrics", "missions").FindOne(context.TODO(),
+		filter).Decode(&mission)
+	if err != nil {
+		c.JSON(http.StatusNotFound, web.Message{Message: err.Error()})
+		return
+	}
+
 	msn := interfaces.Mission{
 		ID:          primitive.NewObjectID(),
 		MissionDate: data.MissionDate,
