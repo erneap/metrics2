@@ -204,26 +204,20 @@ func CreateMission(c *gin.Context) {
 
 	// first check to ensure no other missions with same key value are
 	// present.
-	startDate, err := time.ParseInLocation("2006-01-02", msnDate, time.UTC)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, web.Message{Message: err.Error()})
-		return
-	}
-	endDate := startDate.Add(24 * time.Hour)
+	var msn interfaces.Mission
+	endDate := data.MissionDate.Add(24 * time.Hour)
 
-	log.Println(startDate)
-	log.Println(endDate)
-
-	filter := bson.M{"missionDate": bson.M{"$gte": startDate, "$lt": endDate},
-		"platformID": platform, "sortieID": sortie}
-	err = config.GetCollection(config.DB, "metrics", "missions").FindOne(context.TODO(),
-		filter).Decode(&mission)
-	if err != nil {
-		c.JSON(http.StatusNotFound, web.Message{Message: err.Error()})
+	filter := bson.M{"missionDate": bson.M{"$gte": data.MissionDate, "$lt": endDate},
+		"platformID": data.PlatformID, "sortieID": data.SortieID}
+	err := config.GetCollection(config.DB, "metrics", "missions").FindOne(context.TODO(),
+		filter).Decode(&msn)
+	if err == nil {
+		msn.Decrypt()
+		c.JSON(http.StatusOK, msn)
 		return
 	}
 
-	msn := interfaces.Mission{
+	msn = interfaces.Mission{
 		ID:          primitive.NewObjectID(),
 		MissionDate: data.MissionDate,
 		PlatformID:  data.PlatformID,
@@ -286,7 +280,7 @@ func CreateMission(c *gin.Context) {
 		}
 	}
 	msn.Encrypt()
-	_, err := config.GetCollection(config.DB, "metrics", "missions").InsertOne(ctx, msn)
+	_, err = config.GetCollection(config.DB, "metrics", "missions").InsertOne(ctx, msn)
 	if err != nil {
 		c.JSON(http.StatusNotModified, web.Message{Message: err.Error()})
 	}
