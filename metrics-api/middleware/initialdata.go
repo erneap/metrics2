@@ -10,7 +10,7 @@ import (
 )
 
 func InitialData() systemdata.SystemInfo {
-	jsonFile, err := os.Open("initial.json")
+	jsonFile, err := os.Open("/data/initial/initial.json")
 	if err != nil {
 		log.Println(err)
 	}

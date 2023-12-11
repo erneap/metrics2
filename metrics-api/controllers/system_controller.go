@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -12,7 +13,7 @@ import (
 )
 
 func GetSystemInfo(c *gin.Context) {
-	jsonFile, err := os.Open("initial.json")
+	jsonFile, err := os.Open("/data/initial/initial.json")
 	if err != nil {
 		log.Println(err)
 	}
@@ -26,6 +27,7 @@ func GetSystemInfo(c *gin.Context) {
 		log.Println(err)
 	}
 	jsonString := string(byteArray)
+	fmt.Println(jsonString)
 
 	// set a variable for the system info
 	var systemInfo systemdata.SystemInfo

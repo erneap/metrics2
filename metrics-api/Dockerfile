@@ -34,11 +34,13 @@ FROM scratch
 
 ADD . /data/reports
 ADD . /data/logs
+ADD . /data/initial
 
 COPY --from=builder /etc/passwd /etc/passwd
 COPY --from=builder /etc/group /etc/group
 
 COPY --from=builder /go/bin/metrics-api /go/bin/metrics-api
+COPY initial.json /data/initial/initial.json
 
 USER scheduler:scheduler
 
