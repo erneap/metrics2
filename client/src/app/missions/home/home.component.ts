@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { MissionService } from '../../services/mission.service';
-import { ICommunication, IDcgs, IExploitation, IPlatform } from '../../models/systems';
+import { Communication, Dcgs, ICommunication, IDcgs, IExploitation, IPlatform } from '../../models/systems';
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { IMission, Mission } from '../../models/interfaces/mission';
 import { UpdateMission } from '../../models/web';
@@ -31,6 +31,8 @@ export class MissionsHomeComponent {
   editColor: string = "accent";
   editTooltip: string = "Permit Editing of Key Fields";
   sortieList: string[] = [];
+  communicationList: string[] = [];
+  dcgsList: string[] = [];
 
   constructor(
     public authService: AuthService, 
@@ -106,6 +108,7 @@ export class MissionsHomeComponent {
                 this.sortieList.push(`${msn.sortieID}`);
               });
             }
+            this.missionService.selectedMission = new Mission();
             this.setMission();
           },
           error: err => {
@@ -346,6 +349,8 @@ export class MissionsHomeComponent {
         this.missionForm.controls["sortie"].setValue(`${data.sortieID}`);
         this.missionForm.controls["exploitation"].setValue(data.missionData.exploitation);
         this.missionForm.controls["exploitation"].enable();
+        this.setCommunications();
+        this.setDCGSs();
         this.missionForm.controls["tailnumber"].setValue(data.missionData.tailNumber);
         this.missionForm.controls["tailnumber"].enable();
         this.missionForm.controls["communications"].setValue(data.missionData.communications);
@@ -384,6 +389,8 @@ export class MissionsHomeComponent {
       this.missionForm.controls["sortie"].setValue('');
       this.missionForm.controls["exploitation"].setValue('');
       this.missionForm.controls["exploitation"].disable();
+      this.setCommunications();
+      this.setDCGSs();
       this.missionForm.controls["tailnumber"].setValue('');
       this.missionForm.controls["tailnumber"].disable();
       this.missionForm.controls["communications"].setValue('');
@@ -432,6 +439,8 @@ export class MissionsHomeComponent {
       switch (field.toLowerCase()) {
         case "exploitation":
           update.value = this.missionForm.value.exploitation;
+          this.setCommunications();
+          this.setDCGSs();
           break;
         case "tailnumber":
           update.value = this.missionForm.value.tailnumber;
@@ -510,18 +519,31 @@ export class MissionsHomeComponent {
     return answer
   }
 
-  getCommunications(): ICommunication[] {
-    if (this.missionService.systemInfo && this.missionService.systemInfo.communications) {
-      return this.missionService.systemInfo.communications;
+  setCommunications() {
+    this.communicationList = [];
+    const exp = this.missionForm.value.exploitation;
+    if (this.missionService.systemInfo 
+      && this.missionService.systemInfo.communications) {
+      this.missionService.systemInfo.communications.forEach(iComm => {
+        const comm = new Communication(iComm);
+        if (comm.hasExploitation(exp)) {
+          this.communicationList.push(comm.id);
+        }
+      });
     }
-    return [];
   }
 
-  getDCGSs(): IDcgs[] {
+  setDCGSs() {
+    this.dcgsList = [];
+    const exp = this.missionForm.value.exploitation;
     if (this.missionService.systemInfo && this.missionService.systemInfo.dCGSs) {
-      return this.missionService.systemInfo.dCGSs;
+      this.missionService.systemInfo.dCGSs.forEach(iDcgs => {
+        const dcgs = new Dcgs(iDcgs);
+        if (dcgs.hasExploitation(exp)) {
+          this.dcgsList.push(dcgs.id);
+        }
+      });
     }
-    return [];
   }
 
   getSensors(): IMissionSensor[] {

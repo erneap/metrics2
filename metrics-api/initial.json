@@ -3,50 +3,61 @@
     {
       "id": "Ext-LOS",
       "explanation": "Extended Line-of-Sight",
+      "exploitations": ["Shadow","Federated"],
       "sortID": 2
     },
     {
       "id": "LOS",
       "explanation": "Line-of-Sight",
+      "exploitations": ["Primary"],
       "sortID": 1
     },
     {
       "id": "Non-LOS",
       "explanation": "Not Line-of-Sight",
+      "exploitations": ["Primary","Shadow","Federated"],
       "sortID": 3
     }
   ],
   "dCGSs": [
     {
       "id": "1",
+      "exploitations": ["Shadow","Federated"],
       "sortID": 1
     },
     {
       "id": "2",
+      "exploitations": ["Shadow","Federated"],
       "sortID": 2
     },
     {
       "id": "C",
+      "exploitations": ["Primary", "Federated"],
       "sortID": 3
     },
     {
       "id": "4",
+      "exploitations": ["Shadow","Federated"],
       "sortID": 4
     },
     {
       "id": "5",
+      "exploitations": ["Shadow","Federated"],
       "sortID": 5
     },
     {
       "id": "IN",
+      "exploitations": ["Shadow","Federated"],
       "sortID": 6
     },
     {
       "id": "KS",
+      "exploitations": ["Shadow","Federated"],
       "sortID": 7
     },
     {
       "id": "MA",
+      "exploitations": ["Shadow","Federated"],
       "sortID": 8
     }
   ],

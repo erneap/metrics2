@@ -1,5 +1,7 @@
 package systemdata
 
+import "strings"
+
 type Classification struct {
 	ID     string `json:"id"`
 	Title  string `json:"title"`
@@ -15,9 +17,19 @@ func (c ByClassification) Less(i, j int) bool {
 func (c ByClassification) Swap(i, j int) { c[i], c[j] = c[j], c[i] }
 
 type Communication struct {
-	ID          string `json:"id"`
-	Explanation string `json:"explanation"`
-	SortID      uint   `json:"sortID"`
+	ID            string   `json:"id"`
+	Explanation   string   `json:"explanation"`
+	Exploitations []string `json:"exploitations,omitempty"`
+	SortID        uint     `json:"sortID"`
+}
+
+func (c *Communication) HasExploitation(exp string) bool {
+	for _, exploit := range c.Exploitations {
+		if strings.EqualFold(exp, exploit) {
+			return true
+		}
+	}
+	return false
 }
 
 type ByCommunication []Communication
@@ -29,8 +41,9 @@ func (c ByCommunication) Less(i, j int) bool {
 func (c ByCommunication) Swap(i, j int) { c[i], c[j] = c[j], c[i] }
 
 type DCGS struct {
-	ID     string `json:"id"`
-	SortID uint   `json:"sortID"`
+	ID            string   `json:"id"`
+	Exploitations []string `json:"exploitations,omitempty"`
+	SortID        uint     `json:"sortID"`
 }
 
 type ByDCGS []DCGS

@@ -13,6 +13,10 @@ func InitialData() systemdata.SystemInfo {
 	jsonFile, err := os.Open("/data/initial/initial.json")
 	if err != nil {
 		log.Println(err)
+		jsonFile, err = os.Open("./initial.json")
+		if err != nil {
+			log.Println(err)
+		}
 	}
 
 	log.Println("Opened Initial Data JSON File")
