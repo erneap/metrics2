@@ -22,12 +22,14 @@ export class Dcgs implements IDcgs{
 
     hasExploitation(exp: string): boolean {
         let answer = false;
-        if (this.exploitations) {
-            this.exploitations.forEach(exploit => {
-                if (exploit && exploit.toLowerCase() === exp.toLowerCase()) {
-                    answer = true;
-                }
-            });
+        if (exp && exp !== '') {
+            if (this.exploitations) {
+                this.exploitations.forEach(exploit => {
+                    if (exploit && exploit.toLowerCase() === exp.toLowerCase()) {
+                        answer = true;
+                    }
+                });
+            }
         }
         return answer;
     }

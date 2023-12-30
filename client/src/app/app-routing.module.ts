@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'reports', component: ReportsComponent },
   { path: 'review', component: ReviewComponent },
   { path: 'profile', component: UserProfileComponent },
-  { path: '**', component: PageNotFoundComponent },
+  { path: '**', component: HomeComponent },
 ];
 
 @NgModule({
