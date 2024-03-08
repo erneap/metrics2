@@ -27,6 +27,7 @@ type GroundOutage struct {
 	Problem            string             `json:"problem" bson:"-"`
 	FixAction          string             `json:"fixAction" bson:"-"`
 	MissionOutage      bool               `json:"missionOutage" bson:"missionOutage"`
+	Capability         string             `json:"capability,omitempty" bson:"capability,omitempty"`
 }
 
 type ByOutage []GroundOutage

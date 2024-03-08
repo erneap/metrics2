@@ -5,6 +5,7 @@ export interface IGroundOutage {
     classification: string;
     outageNumber: number;
     outageMinutes: number;
+    capability?: string;
     subSystem: string;
     referenceId: string;
     majorSystem: string;
@@ -21,6 +22,7 @@ export class GroundOutage {
     public classification: string;
     public outageNumber: number;
     public outageMinutes: number;
+    public capability: string;
     public subSystem: string;
     public referenceId: string;
     public majorSystem: string;
@@ -39,6 +41,8 @@ export class GroundOutage {
             ? outage.classification : '';
         this.outageNumber = (outage && outage.outageNumber)
             ? outage.outageNumber : 0;
+        this.capability = (outage && outage.capability) ?
+            outage.capability : 'PMC';
         this.outageMinutes = (outage && outage.outageMinutes) 
             ? outage.outageMinutes : 0;
         this.subSystem = (outage && outage.subSystem) ? outage.subSystem : '';

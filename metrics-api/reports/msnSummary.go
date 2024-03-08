@@ -352,7 +352,8 @@ func (ms *MissionSummary) AddSummarySheet(workbook *excelize.File,
 	var outages []interfaces.GroundOutage
 	for _, outage := range ms.Outages {
 		if (outage.OutageDate.Equal(start) || outage.OutageDate.After(start)) &&
-			(outage.OutageDate.Equal(end) || outage.OutageDate.Before(end)) {
+			(outage.OutageDate.Equal(end) || outage.OutageDate.Before(end) &&
+				outage.Capability == "NMC") {
 			outages = append(outages, outage)
 		}
 	}

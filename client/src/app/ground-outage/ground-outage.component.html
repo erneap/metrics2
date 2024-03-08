@@ -1,7 +1,7 @@
-<div class="fxLayout fxLayout-column-center">
+<div class="fxLayout flexlayout column center">
   <mat-card style="width:90%;background-color: #3f51b5; color: white;">
       <mat-card-header>
-          <div class="fxLayout-row-center">
+          <div class="flexlayout row centerr">
               <h2>Ground Outage Information</h2>
               <span class="flex-spacer"></span>
               <button mat-icon-button color="accent"
@@ -16,9 +16,9 @@
               </button>
           </div>
       </mat-card-header>
-      <mat-card-content class="fxLayout-column-center" style="overflow-y:auto;">
+      <mat-card-content class="flexlayout column center" style="overflow-y:auto;">
           <form [formGroup]="outageForm">
-              <div class="fxLayout-row-center">
+              <div class="flexlayout row center">
                 <div class="formField">
                   <mat-form-field appearance="fill" class="fieldWidth">
                     <mat-label>Ground System</mat-label>
@@ -39,7 +39,7 @@
                   </mat-form-field>
                 </div>
               </div>
-              <div class="fxLayout-row-center">
+              <div class="flexlayout row center">
                 <div class="formField">
                   <mat-form-field appearance="fill" class="fieldWidth">
                     <mat-label>Outage Date</mat-label>
@@ -65,6 +65,16 @@
                 </div>
                 <div class="formField">
                   <mat-form-field class="fieldWidth">
+                    <mat-label>Msn Capabilty</mat-label>
+                    <mat-select formControlName="capability"
+                      (selectionChange)="updateOutage('capability')">
+                      <mat-option value="NMC">NMC</mat-option>
+                      <mat-option value="PMC">PMC</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="formField">
+                  <mat-form-field class="fieldWidth">
                     <mat-label>Outage Time</mat-label>
                     <input matInput formControlName="outagetime"
                       (blur)="updateOutage('outagetime')">
@@ -72,14 +82,14 @@
                   </mat-form-field>
                 </div>
               </div>
-              <div class="fxLayout-row-center" style="margin-bottom: 10px;">
-                <div class="fxLayout-row-center" style="background-color: white;">
+              <div class="flexlayout row center" style="margin-bottom: 10px;">
+                <div class="flexlayout row center" style="background-color: white;">
                   <mat-checkbox formControlName="duringmission"
                   (change)="updateOutage('duringmission')">
                     During Mission</mat-checkbox>
                 </div>
               </div>
-              <div class="fxLayout-row-center">
+              <div class="flexlayout row center">
                 <div class="formField">
                   <mat-form-field class="fieldWidth">
                     <mat-label>Subsystem(s)</mat-label>
@@ -104,14 +114,14 @@
                   </mat-form-field>
                 </div>
               </div>
-              <div class="fxLayout-row-center">
+              <div class="flexlayout row center">
                 <mat-form-field style="width: 800px;">
                   <mat-label>Problem</mat-label>
                   <textarea matInput formControlName="problem" 
                   (blur)="updateOutage('problem')"></textarea>
                 </mat-form-field>
               </div>
-              <div class="fxLayout-row-center">
+              <div class="flexlayout row center">
                 <mat-form-field style="width: 800px;">
                   <mat-label>Fix Action(s)</mat-label>
                   <textarea matInput formControlName="fixaction"

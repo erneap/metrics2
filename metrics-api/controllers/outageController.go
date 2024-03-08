@@ -267,6 +267,8 @@ func UpdateOutage(c *gin.Context) {
 		outage.FixAction = data.StringValue()
 	case "mission", "missionoutage":
 		outage.MissionOutage = data.BooleanValue()
+	case "capability":
+		outage.Capability = data.StringValue()
 	default:
 		c.JSON(http.StatusBadRequest, web.Message{Message: "Unknown Field"})
 		return

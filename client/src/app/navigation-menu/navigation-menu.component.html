@@ -13,6 +13,8 @@
 </mat-nav-list>
 <mat-nav-list class="bottom">
   <a mat-list-item routerLinkActive="active-link"
+    href="/scheduler">Go To Scheduler</a>
+  <a mat-list-item routerLinkActive="active-link"
     *ngIf="this.authService.hasRole('ADMIN')"
     (click)="getOldReports()">Report Archive</a>
 </mat-nav-list>

@@ -36,6 +36,7 @@ export class GroundOutageComponent {
       enclave: '',
       outagedate: new Date(),
       outagenumber: '',
+      capability: 'PMC',
       outagetime: 0,
       duringmission: false,
       subsystems: '',
@@ -178,6 +179,11 @@ export class GroundOutageComponent {
         this.outageService.selectedOutage.problem);
       this.outageForm.controls['fixaction'].setValue(
         this.outageService.selectedOutage.fixAction);
+      this.outageForm.controls['capability'].setValue(
+        this.outageService.selectedOutage.capability ?
+        this.outageService.selectedOutage.capability:
+        'PMC'
+      );
     } else {
       const system = this.outageForm.value.system;
       const enclave = this.outageForm.value.enclave;
@@ -194,6 +200,7 @@ export class GroundOutageComponent {
       this.outageForm.controls['majorarea'].setValue('');
       this.outageForm.controls['problem'].setValue('');
       this.outageForm.controls['fixaction'].setValue('');
+      this.outageForm.controls['capability'].setValue('PMC');
     }
   }
 
@@ -230,8 +237,10 @@ export class GroundOutageComponent {
         case "fixaction":
           update.value = this.outageForm.value.fixaction;
           break;
+        case "capability":
+          update.value = this.outageForm.value.capability;
+          break;
       }
-      console.log(update.value);
       const url = '/metrics/api/v1/outage/';
       this.dialogService.showSpinner();
       this.httpClient.put<IGroundOutage>(url, update, {observe: 'response'})
