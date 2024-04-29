@@ -168,11 +168,15 @@ func (mt *MissionType) GetPremissionTime(sens []string,
 	for _, msn := range mt.Missions {
 		senMax := uint(0)
 		msn.Decrypt()
+		msnExp := strings.ToLower(msn.MissionData.Exploitation)
+		msnComm := strings.ToLower(msn.MissionData.Communications)
 		if gs != nil {
 			for _, exp := range gs.Exploitations {
+				gsExp := strings.ToLower(exp.Exploitation)
+				gsComm := strings.ToLower(exp.CommunicationID)
 				if strings.EqualFold(msn.PlatformID, exp.PlatformID) &&
-					strings.EqualFold(msn.MissionData.Exploitation, exp.Exploitation) &&
-					strings.EqualFold(msn.MissionData.Communications, exp.CommunicationID) {
+					strings.Contains(gsExp, msnExp) &&
+					strings.Contains(gsComm, msnComm) {
 					for _, mSen := range msn.MissionData.Sensors {
 						if strings.EqualFold(exp.SensorType, mSen.SensorID) &&
 							senMax < mSen.PreflightMinutes {
@@ -202,11 +206,15 @@ func (mt *MissionType) GetPostmissionTime(sens []string,
 	for _, msn := range mt.Missions {
 		senMax := uint(0)
 		msn.Decrypt()
+		msnExp := strings.ToLower(msn.MissionData.Exploitation)
+		msnComm := strings.ToLower(msn.MissionData.Communications)
 		if gs != nil {
 			for _, exp := range gs.Exploitations {
+				gsExp := strings.ToLower(exp.Exploitation)
+				gsComm := strings.ToLower(exp.CommunicationID)
 				if strings.EqualFold(msn.PlatformID, exp.PlatformID) &&
-					strings.EqualFold(msn.MissionData.Exploitation, exp.Exploitation) &&
-					strings.EqualFold(msn.MissionData.Communications, exp.CommunicationID) {
+					strings.Contains(gsExp, msnExp) &&
+					strings.Contains(gsComm, msnComm) {
 					for _, mSen := range msn.MissionData.Sensors {
 						if strings.EqualFold(exp.SensorType, mSen.SensorID) &&
 							senMax < mSen.PostflightMinutes {
@@ -236,11 +244,15 @@ func (mt *MissionType) GetScheduledTime(sens []string,
 	for _, msn := range mt.Missions {
 		senMax := uint(0)
 		msn.Decrypt()
+		msnExp := strings.ToLower(msn.MissionData.Exploitation)
+		msnComm := strings.ToLower(msn.MissionData.Communications)
 		if gs != nil {
 			for _, exp := range gs.Exploitations {
+				gsExp := strings.ToLower(exp.Exploitation)
+				gsComm := strings.ToLower(exp.CommunicationID)
 				if strings.EqualFold(msn.PlatformID, exp.PlatformID) &&
-					strings.EqualFold(msn.MissionData.Exploitation, exp.Exploitation) &&
-					strings.EqualFold(msn.MissionData.Communications, exp.CommunicationID) {
+					strings.Contains(gsExp, msnExp) &&
+					strings.Contains(gsComm, msnComm) {
 					for _, mSen := range msn.MissionData.Sensors {
 						if strings.EqualFold(exp.SensorType, mSen.SensorID) &&
 							senMax < mSen.ScheduledMinutes {
@@ -270,11 +282,15 @@ func (mt *MissionType) GetExecutedTime(sens []string,
 	for _, msn := range mt.Missions {
 		senMax := uint(0)
 		msn.Decrypt()
+		msnExp := strings.ToLower(msn.MissionData.Exploitation)
+		msnComm := strings.ToLower(msn.MissionData.Communications)
 		if gs != nil {
 			for _, exp := range gs.Exploitations {
+				gsExp := strings.ToLower(exp.Exploitation)
+				gsComm := strings.ToLower(exp.CommunicationID)
 				if strings.EqualFold(msn.PlatformID, exp.PlatformID) &&
-					strings.EqualFold(msn.MissionData.Exploitation, exp.Exploitation) &&
-					strings.EqualFold(msn.MissionData.Communications, exp.CommunicationID) {
+					strings.Contains(gsExp, msnExp) &&
+					strings.Contains(gsComm, msnComm) {
 					for _, mSen := range msn.MissionData.Sensors {
 						if strings.EqualFold(exp.SensorType, mSen.SensorID) &&
 							senMax < mSen.ExecutedMinutes {
@@ -304,11 +320,15 @@ func (mt *MissionType) GetAdditional(sens []string,
 	for _, msn := range mt.Missions {
 		senMax := uint(0)
 		msn.Decrypt()
+		msnExp := strings.ToLower(msn.MissionData.Exploitation)
+		msnComm := strings.ToLower(msn.MissionData.Communications)
 		if gs != nil {
 			for _, exp := range gs.Exploitations {
+				gsExp := strings.ToLower(exp.Exploitation)
+				gsComm := strings.ToLower(exp.CommunicationID)
 				if strings.EqualFold(msn.PlatformID, exp.PlatformID) &&
-					strings.EqualFold(msn.MissionData.Exploitation, exp.Exploitation) &&
-					strings.EqualFold(msn.MissionData.Communications, exp.CommunicationID) {
+					strings.Contains(gsExp, msnExp) &&
+					strings.Contains(gsComm, msnComm) {
 					for _, mSen := range msn.MissionData.Sensors {
 						if strings.EqualFold(exp.SensorType, mSen.SensorID) &&
 							senMax < mSen.AdditionalMinutes {
